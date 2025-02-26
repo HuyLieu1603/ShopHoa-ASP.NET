@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="20dd0b2ff8b94b3387f5e6cbb42e1127" Name="Diagram1">
+        <EntityTypeShape EntityType="ShopHoaModel.Category" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Customer" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Orders" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Product" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Role" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Size" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Staff" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.Statistical" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopHoaModel.TypeFlower" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="ShopHoaModel.FK__Product__MaLoaiS__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Orders__MaKH__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Orders__MaNV__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Orders__MaSP__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Orders__MaTK__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Product__MaKT__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Product__MaLoaiH__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Product__MaTK__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopHoaModel.FK__Staff__MaCV__60A75C0F" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

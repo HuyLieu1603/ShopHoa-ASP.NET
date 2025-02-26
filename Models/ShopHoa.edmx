@@ -1,0 +1,640 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ShopHoaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="MaLoaiSP" />
+          </Key>
+          <Property Name="MaLoaiSP" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenLoaiSP" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HoTenKH" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="30" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="CCCD" Type="varchar" MaxLength="12" />
+          <Property Name="SDT" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NgayLapHD" Type="datetime" />
+          <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="MaNV" Type="uniqueidentifier" />
+          <Property Name="MaKH" Type="uniqueidentifier" />
+          <Property Name="MaTK" Type="uniqueidentifier" />
+          <Property Name="MaSP" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="50" />
+          <Property Name="GiaTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="MaLoaiSP" Type="uniqueidentifier" />
+          <Property Name="MaLoaiHoa" Type="uniqueidentifier" />
+          <Property Name="MaKT" Type="int" />
+          <Property Name="MaTK" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenCV" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="MaKT" />
+          </Key>
+          <Property Name="MaKT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="HoTenNV" Type="nvarchar" MaxLength="100" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="DiaChi" Type="nvarchar(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="30" />
+          <Property Name="CCCD" Type="varchar" MaxLength="12" />
+          <Property Name="MaCV" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statistical">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TongTien" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="NgayTK" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TypeFlower">
+          <Key>
+            <PropertyRef Name="MaLoaiHoa" />
+          </Key>
+          <Property Name="MaLoaiHoa" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TenLoaiHoa" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Orders__MaKH__656C112C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaNV__6477ECF3">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaSP__6754599E">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaTK__66603565">
+          <End Role="Statistical" Type="Self.Statistical" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statistical">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaKT__571DF1D5">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="MaKT" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaKT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaLoaiH__5629CD9C">
+          <End Role="TypeFlower" Type="Self.TypeFlower" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeFlower">
+              <PropertyRef Name="MaLoaiHoa" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaLoaiHoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaLoaiS__5535A963">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="MaLoaiSP" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaLoaiSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaTK__5812160E">
+          <End Role="Statistical" Type="Self.Statistical" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statistical">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__MaCV__60A75C0F">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopHoaModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Size" EntityType="Self.Size" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistical" EntityType="Self.Statistical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeFlower" EntityType="Self.TypeFlower" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Orders__MaKH__656C112C" Association="Self.FK__Orders__MaKH__656C112C">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaNV__6477ECF3" Association="Self.FK__Orders__MaNV__6477ECF3">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaSP__6754599E" Association="Self.FK__Orders__MaSP__6754599E">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaTK__66603565" Association="Self.FK__Orders__MaTK__66603565">
+            <End Role="Statistical" EntitySet="Statistical" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaKT__571DF1D5" Association="Self.FK__Product__MaKT__571DF1D5">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaLoaiH__5629CD9C" Association="Self.FK__Product__MaLoaiH__5629CD9C">
+            <End Role="TypeFlower" EntitySet="TypeFlower" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaLoaiS__5535A963" Association="Self.FK__Product__MaLoaiS__5535A963">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaTK__5812160E" Association="Self.FK__Product__MaTK__5812160E">
+            <End Role="Statistical" EntitySet="Statistical" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__MaCV__60A75C0F" Association="Self.FK__Staff__MaCV__60A75C0F">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShopHoaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="MaLoaiSP" />
+          </Key>
+          <Property Name="MaLoaiSP" Type="Guid" Nullable="false" />
+          <Property Name="TenLoaiSP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__MaLoaiS__5535A963" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Guid" Nullable="false" />
+          <Property Name="HoTenKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SDT" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__MaKH__656C112C" FromRole="Customer" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="MaHD" />
+          </Key>
+          <Property Name="MaHD" Type="Guid" Nullable="false" />
+          <Property Name="NgayLapHD" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MaNV" Type="Guid" />
+          <Property Name="MaKH" Type="Guid" />
+          <Property Name="MaTK" Type="Guid" />
+          <Property Name="MaSP" Type="Guid" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__MaKH__656C112C" FromRole="Orders" ToRole="Customer" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Orders__MaNV__6477ECF3" FromRole="Orders" ToRole="Staff" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Orders__MaSP__6754599E" FromRole="Orders" ToRole="Product" />
+          <NavigationProperty Name="Statistical" Relationship="Self.FK__Orders__MaTK__66603565" FromRole="Orders" ToRole="Statistical" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="Guid" Nullable="false" />
+          <Property Name="TenSP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiSP" Type="Guid" />
+          <Property Name="MaLoaiHoa" Type="Guid" />
+          <Property Name="MaKT" Type="Int32" />
+          <Property Name="MaTK" Type="Guid" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__MaLoaiS__5535A963" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__MaSP__6754599E" FromRole="Product" ToRole="Orders" />
+          <NavigationProperty Name="Size" Relationship="Self.FK__Product__MaKT__571DF1D5" FromRole="Product" ToRole="Size" />
+          <NavigationProperty Name="TypeFlower" Relationship="Self.FK__Product__MaLoaiH__5629CD9C" FromRole="Product" ToRole="TypeFlower" />
+          <NavigationProperty Name="Statistical" Relationship="Self.FK__Product__MaTK__5812160E" FromRole="Product" ToRole="Statistical" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="MaCV" />
+          </Key>
+          <Property Name="MaCV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenCV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__MaCV__60A75C0F" FromRole="Role" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Size">
+          <Key>
+            <PropertyRef Name="MaKT" />
+          </Key>
+          <Property Name="MaKT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__MaKT__571DF1D5" FromRole="Size" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Guid" Nullable="false" />
+          <Property Name="HoTenNV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CCCD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MaCV" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__MaNV__6477ECF3" FromRole="Staff" ToRole="Orders" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Staff__MaCV__60A75C0F" FromRole="Staff" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Statistical">
+          <Key>
+            <PropertyRef Name="MaTK" />
+          </Key>
+          <Property Name="MaTK" Type="Guid" Nullable="false" />
+          <Property Name="TongTien" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NgayTK" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__MaTK__66603565" FromRole="Statistical" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__MaTK__5812160E" FromRole="Statistical" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="TypeFlower">
+          <Key>
+            <PropertyRef Name="MaLoaiHoa" />
+          </Key>
+          <Property Name="MaLoaiHoa" Type="Guid" Nullable="false" />
+          <Property Name="TenLoaiHoa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__MaLoaiH__5629CD9C" FromRole="TypeFlower" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Product__MaLoaiS__5535A963">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="MaLoaiSP" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaLoaiSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaKH__656C112C">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaNV__6477ECF3">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaSP__6754599E">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__MaTK__66603565">
+          <End Role="Statistical" Type="Self.Statistical" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statistical">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaKT__571DF1D5">
+          <End Role="Size" Type="Self.Size" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Size">
+              <PropertyRef Name="MaKT" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaKT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaLoaiH__5629CD9C">
+          <End Role="TypeFlower" Type="Self.TypeFlower" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeFlower">
+              <PropertyRef Name="MaLoaiHoa" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaLoaiHoa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__MaTK__5812160E">
+          <End Role="Statistical" Type="Self.Statistical" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statistical">
+              <PropertyRef Name="MaTK" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaTK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff__MaCV__60A75C0F">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="MaCV" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="MaCV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShopHoaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Size" EntityType="Self.Size" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Statistical" EntityType="Self.Statistical" />
+          <EntitySet Name="TypeFlower" EntityType="Self.TypeFlower" />
+          <AssociationSet Name="FK__Product__MaLoaiS__5535A963" Association="Self.FK__Product__MaLoaiS__5535A963">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaKH__656C112C" Association="Self.FK__Orders__MaKH__656C112C">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaNV__6477ECF3" Association="Self.FK__Orders__MaNV__6477ECF3">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaSP__6754599E" Association="Self.FK__Orders__MaSP__6754599E">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__MaTK__66603565" Association="Self.FK__Orders__MaTK__66603565">
+            <End Role="Statistical" EntitySet="Statistical" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaKT__571DF1D5" Association="Self.FK__Product__MaKT__571DF1D5">
+            <End Role="Size" EntitySet="Size" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaLoaiH__5629CD9C" Association="Self.FK__Product__MaLoaiH__5629CD9C">
+            <End Role="TypeFlower" EntitySet="TypeFlower" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__MaTK__5812160E" Association="Self.FK__Product__MaTK__5812160E">
+            <End Role="Statistical" EntitySet="Statistical" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff__MaCV__60A75C0F" Association="Self.FK__Staff__MaCV__60A75C0F">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ShopHoaModelStoreContainer" CdmEntityContainer="ShopHoaEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="ShopHoaModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
+                <ScalarProperty Name="TenLoaiSP" ColumnName="TenLoaiSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="ShopHoaModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="HoTenKH" ColumnName="HoTenKH" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ShopHoaModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="MaHD" ColumnName="MaHD" />
+                <ScalarProperty Name="NgayLapHD" ColumnName="NgayLapHD" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="ShopHoaModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaLoaiSP" ColumnName="MaLoaiSP" />
+                <ScalarProperty Name="MaLoaiHoa" ColumnName="MaLoaiHoa" />
+                <ScalarProperty Name="MaKT" ColumnName="MaKT" />
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ShopHoaModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+                <ScalarProperty Name="TenCV" ColumnName="TenCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Size">
+            <EntityTypeMapping TypeName="ShopHoaModel.Size">
+              <MappingFragment StoreEntitySet="Size">
+                <ScalarProperty Name="MaKT" ColumnName="MaKT" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="ShopHoaModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="HoTenNV" ColumnName="HoTenNV" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="MaCV" ColumnName="MaCV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistical">
+            <EntityTypeMapping TypeName="ShopHoaModel.Statistical">
+              <MappingFragment StoreEntitySet="Statistical">
+                <ScalarProperty Name="MaTK" ColumnName="MaTK" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NgayTK" ColumnName="NgayTK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeFlower">
+            <EntityTypeMapping TypeName="ShopHoaModel.TypeFlower">
+              <MappingFragment StoreEntitySet="TypeFlower">
+                <ScalarProperty Name="MaLoaiHoa" ColumnName="MaLoaiHoa" />
+                <ScalarProperty Name="TenLoaiHoa" ColumnName="TenLoaiHoa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
