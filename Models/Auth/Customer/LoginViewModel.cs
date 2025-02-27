@@ -13,6 +13,6 @@ namespace ShopHoa.Models.Auth.Customer
         public string Email { get; set; }
         [Required(ErrorMessage ="Vui lòng nhập mạt khẩu!")]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string MatKhau { get; set; }
     }
 }

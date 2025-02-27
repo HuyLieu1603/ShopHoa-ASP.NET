@@ -25,8 +25,6 @@ namespace ShopHoa.Helpers
             };
 
             var token = new JwtSecurityToken(
-                issuer: "http://localhost:3000",
-                audience: "http://localhost:3000",
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(expireMinutes),
                 signingCredentials: credentials
