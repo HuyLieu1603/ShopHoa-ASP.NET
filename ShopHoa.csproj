@@ -192,6 +192,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\Auth\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Home\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageAccount\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,6 +245,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin-layout\admin-layout.css" />
+    <Content Include="Content\admin-layout\admin-layout.js" />
+    <Content Include="Content\auth\AdminLogin.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -289,6 +293,11 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
