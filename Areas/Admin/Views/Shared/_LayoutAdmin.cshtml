@@ -20,14 +20,19 @@
     <link href="~/Content/admin-layout/admin-layout.css" rel="stylesheet" />
     <link href="" rel="stylesheet" />
 </head>
+@{ 
+    var user = Session["User"] != null 
+        ? Newtonsoft.Json.JsonConvert.DeserializeObject<ShopHoa.Models.Staff>(Session["User"].ToString()) 
+        : null;
+}
 <body class="home min-vh-100">
     <div class="container-fluid display-table min-vh-100">
         <div class="row display-table-row ">
             <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
                 <div class="logo">
                     <a hef="home.html">
-                        <img src="http://jskrishna.com/work/merkury/images/logo.png" alt="merkery_logo" class="hidden-xs hidden-sm">
-                        <img src="http://jskrishna.com/work/merkury/images/circle-logo.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
+                        <img src="https://img.freepik.com/premium-vector/it-specialist-vector-character-flat-style-illustration_1033579-67105.jpg" alt="merkery_logo" class="hidden-xs hidden-sm">
+                        <img src="https://img.freepik.com/premium-vector/it-specialist-vector-character-flat-style-illustration_1033579-67105.jpg" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
                     </a>
                 </div>
                 <div class="navi">
@@ -41,7 +46,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+            <div class="container-fluid col-md-10 col-sm-11 display-table-cell v-align">
                 <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
                 <div class="row">
                     <header>
@@ -73,8 +78,8 @@
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <img src="http://jskrishna.com/work/merkury/images/user-pic.jpg" alt="user">
-                                            <b class="caret"></b>
+                                            <img src="https://img.freepik.com/premium-vector/it-specialist-vector-character-flat-style-illustration_1033579-67105.jpg" alt="user">
+                                            @*<b class="caret"></b>*@
                                         </a>
                                         <ul class="dropdown-menu">
                                             <li>
@@ -86,6 +91,7 @@
                                                     <div class="divider">
                                                     </div>
                                                     <a href="#" class="view btn-sm active">View Profile</a>
+                                                    <a href="#" class="view btn-sm active">Log out</a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -96,8 +102,8 @@
                     </header>
                 </div>
                 <div class="user-dashboard">
-                    <h1>Hello, JS</h1>
-                    @RenderBody();
+                    <h1>Hello, @(user != null ? user.HoTenNV : "user")</h1>
+                    @RenderBody()
                 </div>
             </div>
         </div>

@@ -5,71 +5,163 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+@*<h2>Details</h2>
 
-<div>
-    <h4>Staff</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTenNV)
-        </dt>
+    <div>
+        <h4>Staff</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.HoTenNV)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HoTenNV)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HoTenNV)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgaySinh)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgaySinh)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MatKhau)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.MatKhau)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MatKhau)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CCCD)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CCCD)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CCCD)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CCCD)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Role.TenCV)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Role.TenCV)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Role.TenCV)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Role.TenCV)
+            </dd>
 
-    </dl>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MaNV }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Chỉnh sửa thông tin</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Công ty (disabled)</label>
+                                    <input type="text" class="form-control" disabled="" placeholder="Company" value="Phúc Hưng Kim.">
+                                </div>
+                            </div>
+                            <div class="col-md-3 px-md-1">
+                                <div class="form-group">
+                                    <label>Tên người dùng</label>
+                                    <input type="text" class="form-control" placeholder="Username" value="@Model.HoTenNV">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" placeholder="@Model.Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pr-md-1">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" placeholder="Company" value="Mike">
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-md-1">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Last Name" value="Andrew">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="City" value="Mike">
+                                </div>
+                            </div>
+                            <div class="col-md-4 px-md-1">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <input type="text" class="form-control" placeholder="Country" value="Andrew">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Postal Code</label>
+                                    <input type="number" class="form-control" placeholder="ZIP Code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>About Me</label>
+                                    <textarea rows="4" cols="80" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Lưu thông tin</button>
+                    <button type="submit" class="btn btn-fill btn">Quay lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaNV }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

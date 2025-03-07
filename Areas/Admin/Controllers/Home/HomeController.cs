@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShopHoa.Models;
+using ShopHoa.Utils;
 
 namespace ShopHoa.Areas.Admin.Controllers.Home
 {
+    [@Authorize]
     public class HomeController : Controller
     {
         private ShopHoaEntities db = new ShopHoaEntities();

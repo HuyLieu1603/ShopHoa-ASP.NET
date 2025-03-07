@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ShopHoa.Models;
 using ShopHoa.Helpers;
 using ShopHoa.Models.Auth.Customer;
+using Newtonsoft.Json;
 
 namespace ShopHoa.Areas.Admin.Controllers.Auth
 {
@@ -32,17 +33,38 @@ namespace ShopHoa.Areas.Admin.Controllers.Auth
                 return View(user);
             }
             var token = JwtHelper.GenerateToken(user.Email);
+            //Lưu thông tin vào session
+            var userFull= db.Staff.Where(u=>u.Email == user.Email).FirstOrDefault();
+            var userDataJson = JsonConvert.SerializeObject(userFull, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            Session["User"] = userDataJson;
             //Lưu token vào Cookie
-            HttpCookie authCookie = new HttpCookie("JwtToken", token);
-            authCookie.Expires = DateTime.Now.AddMinutes(60);
+            HttpCookie authCookie = new HttpCookie("AuthToken", token)
+            {
+                   HttpOnly = true,
+                   Secure = true,
+                   Expires= DateTime.Now.AddHours(1)
+            };
             Response.Cookies.Add(authCookie);
 
             return RedirectToAction("Index", "Home");
         }
 
+        //LOG OUT
         public ActionResult Logout()
         {
-            return View();
+            if (Request.Cookies["AuthToken"]!=null)
+            {
+                HttpCookie authCookie = new HttpCookie("AuthToken")
+                {
+                    Expires = DateTime.Now.AddHours(-1)
+                };
+                Response.Cookies.Add(authCookie);
+            }
+            Session["User"]= null;
+            return RedirectToAction("Login");
         }
     }
 }
